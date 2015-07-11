@@ -5,11 +5,11 @@ permalink:           pretty
 relative_permalinks: true
 
 # Setup
-title:               Poole
-tagline:             The Jekyll Butler
-url:                 http://getpoole.com
+title:               Wasi's Blog
+tagline:             Awesome Blog Stuff
+url:                 http://syedwasihaider.github.io/blog/
 paginate:            1
-baseurl:             ""
+baseurl:             "http://syedwasihaider.github.io/blog/"
 
 # Assets
 #
@@ -18,13 +18,8 @@ sass:
   sass_dir:          _sass
   style:            :compressed
 
-# About/contact
-author:
-  name:              Mark Otto
-  url:               https://twitter.com/mdo
-  email:             markdotto@gmail.com
 
 # Custom vars
 version:             2.0.0
 github:
-  repo:              https://github.com/poole/poole
+  repo:              https://github.com/SyedWasiHaider/blog/
