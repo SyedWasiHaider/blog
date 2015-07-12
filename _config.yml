@@ -7,9 +7,9 @@ relative_permalinks: true
 # Setup
 title:               Wasi's Blog
 tagline:             Awesome Blog Stuff
-url:                 http://syedwasihaider.github.io/blog/
+url:                 http://syedwasihaider.github.io/blog
 paginate:            1
-baseurl:             "http://syedwasihaider.github.io/blog/"
+baseurl:             "http://syedwasihaider.github.io/blog"
 
 # Assets
 #
