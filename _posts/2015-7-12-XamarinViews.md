@@ -38,7 +38,7 @@ Fire up Xamarin studio and create a new Android project.
 
 Lets get rid of the button since we won't be using it. From the panel on the left, go to Resources -> Layout -> Main.axml and get rid of the button element. So your main.axml should look like this:
 
-<code>
+{% highlight html linenos %}	
 
 	<?xml version="1.0" encoding="utf-8"?>
 	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -48,7 +48,7 @@ Lets get rid of the button since we won't be using it. From the panel on the lef
 
 	</LinearLayout>
 
-<code>
+{% endhighlight %}
 
 Lets also get rid of the button related code in the MainActivity.cs (which can be found at root of the project). So you code should look something like this for now:
 
@@ -60,7 +60,7 @@ Lets also get rid of the button related code in the MainActivity.cs (which can b
 	namespace XamarinDemo
 	{
 		[Activity (Label = "XamarinDemo", MainLauncher = true, Icon = "@drawable/icon")]
-		http://syedwasihaider.github.io/blog/public class MainActivity : Activity
+		public class MainActivity : Activity
 		{
 
 			protected override void OnCreate (Bundle bundle)
@@ -96,21 +96,21 @@ Lets extend the View class and put the necessary minimum we need to get the view
 
 	namespace XamarinDemo
 	{
-		http://syedwasihaider.github.io/blog/public class AwesomeView : View
+		public class AwesomeView : View
 		{
 			Context mContext;
-			http://syedwasihaider.github.io/blog/public AwesomeView(Context context) :
+			public AwesomeView(Context context) :
 			base(context)
 			{
 				init (context);
 			}
-			http://syedwasihaider.github.io/blog/public AwesomeView(Context context, IAttributeSet attrs) :
+			public AwesomeView(Context context, IAttributeSet attrs) :
 			base(context, attrs)
 			{
 				init (context);
 			}
 
-			http://syedwasihaider.github.io/blog/public AwesomeView(Context context, IAttributeSet attrs, int defStyle) :
+			public AwesomeView(Context context, IAttributeSet attrs, int defStyle) :
 			base(context, attrs, defStyle)
 			{
 				init (context);
@@ -268,10 +268,10 @@ Now lets add some interactivity to our view. First, we need to keep track of the
 
 Next we'll override the ontouchevent function and also check if the event is inside any of the given circles. The is InsideCircle function will basically return the index of the circle that was tapped/touched.
 
-
 {% highlight java linenos %}	
 
-		http://syedwasihaider.github.io/blog/public override bool OnTouchEvent(MotionEvent e) {
+
+		override bool OnTouchEvent(MotionEvent e) {
 
 			int indexHit = isInsideCircle (e.GetX (), e.GetY ());
 			if (indexHit > -1) {
@@ -366,7 +366,7 @@ Now lets add the start and end values for each animator and actually start the a
 
 {% highlight java linenos %}	
 
-	http://syedwasihaider.github.io/blog/public override bool OnTouchEvent(MotionEvent e) {
+		 override bool OnTouchEvent(MotionEvent e) {
 
 			float centerScreenX = Width / 2.0f;
 			float centerScreenY = Height / 2.0f;
@@ -447,7 +447,7 @@ Fire up the app and you should see something like this:
 Lets add an array to hold some names to display in the circles.
 
 {% highlight java linenos %}	
-		http://syedwasihaider.github.io/blog/public string [] names {get;set;}
+		public string [] names {get;set;}
 {% endhighlight %}
 
 
@@ -536,7 +536,7 @@ using Android.Views.Animations;
 
 namespace XamarinDemo
 {
-	http://syedwasihaider.github.io/blog/public class AwesomeView : View
+	public class AwesomeView : View
 	{
 		
 		Context mContext;
@@ -552,20 +552,20 @@ namespace XamarinDemo
 
 		Color []colors = new []{Color.Red, Color.LightBlue, Color.Green, Color.Yellow, Color.Orange};
 
-		http://syedwasihaider.github.io/blog/public string [] names {get;set;}
+		public string [] names {get;set;}
 
-		http://syedwasihaider.github.io/blog/public AwesomeView(Context context) :
+		public AwesomeView(Context context) :
 		base(context)
 		{
 			init (context);
 		}
-		http://syedwasihaider.github.io/blog/public AwesomeView(Context context, IAttributeSet attrs) :
+		public AwesomeView(Context context, IAttributeSet attrs) :
 		base(context, attrs)
 		{
 			init (context);
 		}
 
-		http://syedwasihaider.github.io/blog/public AwesomeView(Context context, IAttributeSet attrs, int defStyle) :
+		public AwesomeView(Context context, IAttributeSet attrs, int defStyle) :
 		base(context, attrs, defStyle)
 		{
 			init (context);
@@ -599,7 +599,7 @@ namespace XamarinDemo
 
 		}
 
-		http://syedwasihaider.github.io/blog/public override bool OnTouchEvent(MotionEvent e) {
+		public override bool OnTouchEvent(MotionEvent e) {
 
 			float centerScreenX = Width / 2.0f;
 			float centerScreenY = Height / 2.0f;
