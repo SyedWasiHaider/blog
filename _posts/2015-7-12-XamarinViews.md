@@ -120,13 +120,13 @@ Lets extend the View class and put the necessary minimum we need to get the view
 		}
 	}
 
-<code>
+{% endhighlight %}
 
 
 Lets include this view in our layout
 
 
-{% highlight java linenos %}	
+<code>
 
 	<?xml version="1.0" encoding="utf-8"?>
 	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -167,7 +167,7 @@ The first thing we need to do to start drawing is to override the onDraw method 
 		}
 
 
-<code>
+{% endhighlight %}
 
 
 Lets start with drawing the little circles at the bottom. Add the following to drawSmallCircles:
@@ -216,7 +216,7 @@ If you understood that, then drawing the big circle should be even easier.
 			canvas.DrawCircle (Width/2.0, Height/2.0, radius_big, paintCircle);
 		}
 
-<code>
+{% endhighlight %}
 
 
 
@@ -261,7 +261,8 @@ Now lets add some interactivity to our view. First, we need to keep track of the
 		}
 	
 
-<code>
+{% endhighlight %}
+
 
 
 Next we'll override the ontouchevent function and also check if the event is inside any of the given circles. The is InsideCircle function will basically return the index of the circle that was tapped/touched.
@@ -294,7 +295,7 @@ Next we'll override the ontouchevent function and also check if the event is ins
 			return -1;
 		}
 
-<code>
+{% endhighlight %}
 
 
 Tap the small circles and you should see the toast show up with the correct index.
@@ -318,7 +319,7 @@ Now lets add some cool animations to this view. Remember we want the small circl
 		ValueAnimator animatorRadius;
 
 
-<code>
+{% endhighlight %}
 
 
 By active, I just mean the big circle. Now let's initialize them by putting the following in the init function:
@@ -354,8 +355,8 @@ By active, I just mean the big circle. Now let's initialize them by putting the 
 		};
 
 
+{% endhighlight %}
 
-<code>
 
 This is just saying that each animation will last 1 second and we added a fancy interpolator to make the animation look cool (feel free to change it up). We also subscribe to the update event to get the latest value and then we call invalidate which basically clear the canvas and call the onDraw method again.
 
@@ -404,7 +405,7 @@ Now lets add the start and end values for each animator and actually start the a
 			}
 		}
 
-<code>
+{% endhighlight %}
 
 
 In the ontouchevent function, now set the activeindex and all the starting and end values for the interpolator. In the drawSmallCircles function, we skip the index if its the big circle and in the drawBigCircle function we only draw something has actually been tapped (i.e. the index is greated than -1)
@@ -420,22 +421,24 @@ Lets finish this off by adding some colors and text to our circles. Add the foll
 
 	Color []colors = new []{Color.Red, Color.LightBlue, Color.Green, Color.Yellow, Color.Orange};
 
-<code>
+{% endhighlight %}
+
 
 And as you might've guessed, we just replace the white color in paint with the colors[index]. Replace paintCircle with the following in the small circle function and move it inside the for loop
 
 
 {% highlight java linenos %}	
 var paintCircle = new Paint (){ Color = colors[i]};
-<code>
+{% endhighlight %}
+
 
 
 And with this in the big circle function:
 
 {% highlight java linenos %}	
-
 var paintCircle = new Paint (){ Color = colors[activeIndex]};
-<code>
+{% endhighlight %}
+
 
 Fire up the app and you should see something like this:
 
@@ -446,18 +449,17 @@ Lets add an array to hold some names to display in the circles.
 
 {% highlight java linenos %}	
 		public string [] names {get;set;}
-<code>
+{% endhighlight %}
+
 
 
 And then in your MainActivity.cs add the following names (or anything names you want) but make sure you have at least 5.
 
 
 {% highlight java linenos %}	
-
 	var awesomeview = FindViewById<AwesomeView> (Resource.Id.awesomeview_main);
 	awesomeview.names = new []{"Bob", "John", "Paul", "Wasi", "Mark"};
-
-<code>
+{% endhighlight %}
 
 
 Finally lets show the names on the big circle. Modify the big circle function as follows:
@@ -483,7 +485,7 @@ Finally lets show the names on the big circle. Modify the big circle function as
 			}
 	}
 
-<code>
+{% endhighlight %}
 
 
 Lets also show the first letter of each name on the little circle.
@@ -517,7 +519,7 @@ Lets also show the first letter of each name on the little circle.
 		}
 
 
-<code>
+{% endhighlight %}
 
 
 ### Done
