@@ -97,23 +97,29 @@ Lets extend the View class and put the necessary minimum we need to get the view
 	{
 		public class AwesomeView : View
 		{
+			Context mContext;
 			public AwesomeView(Context context) :
 			base(context)
 			{
+				init (context);
 			}
 			public AwesomeView(Context context, IAttributeSet attrs) :
 			base(context, attrs)
 			{
+				init (context);
 			}
 
 			public AwesomeView(Context context, IAttributeSet attrs, int defStyle) :
 			base(context, attrs, defStyle)
 			{
+				init (context);
+			}
+
+			private void init(Context ctx){
+				mContext = ctx;
 			}
 		}
 	}
-
-
 
 <code>
 
@@ -141,3 +147,66 @@ Lets include this view in our layout
 
 
 Hit the play button and you'll see...Nothing. Well that's because we aren't doing any drawing yet.
+
+
+### Step 2 
+
+The first thing we need to do to start drawing is to override the onDraw method for the view. We'll also create two stub functions called drawBigCircle and drawSmallCircle to make our code a little easier to work with. So you should've added the following to your view:
+
+<code>
+
+
+		private void drawBigCircle(Canvas canvas){
+		}
+
+		private void drawSmallCircles(Canvas canvas){
+		}
+
+		protected override void OnDraw(Canvas canvas){
+			drawSmallCircles (canvas);
+			drawBigCircle (canvas);
+		}
+
+
+<code>
+
+
+Lets start with drawing the little circles at the bottom. Add the following to drawSmallCircles:
+
+<code>
+
+		const int NUM_BUBBLES = 5;
+		int radius = 60;
+		private void drawSmallCircles(Canvas canvas){
+
+			int spacing = Width / NUM_BUBBLES;
+			int shift = spacing / 2;
+			int bottomMargin = 10;
+
+			var paintCircle = new Paint (){ Color = Color.White};
+			for (int i = 0; i < NUM_BUBBLES; i++) {
+				int x = i * spacing + shift;
+				int y = Height - radius * 2 - bottomMargin;
+				canvas.DrawCircle (x, y, radius, paintCircle);
+			}
+
+		}
+
+<code>
+
+Note that the 0,0 starts at the top left corner (as with most drawing engines). We equally space the 5 circles and show them just above the bottom of the screen. You should see something like this when you hit play:
+
+
+
+![step2](public/step2.png "Step 2")
+
+
+If you understood that, then drawing the big circle should be even easier:
+
+
+<code>
+
+
+
+<code>
+	
