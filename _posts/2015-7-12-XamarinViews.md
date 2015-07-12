@@ -53,26 +53,25 @@ Lets also get rid of the button related code in the MainActivity.cs (which can b
 
 <code>
 
+	using Android.App;
+	using Android.OS;
 
-using Android.App;
-using Android.OS;
-
-namespace XamarinDemo
-{
-	[Activity (Label = "XamarinDemo", MainLauncher = true, Icon = "@drawable/icon")]
-	public class MainActivity : Activity
+	namespace XamarinDemo
 	{
-
-		protected override void OnCreate (Bundle bundle)
+		[Activity (Label = "XamarinDemo", MainLauncher = true, Icon = "@drawable/icon")]
+		public class MainActivity : Activity
 		{
-			base.OnCreate (bundle);
 
-			// Set our view from the "main" layout resource
-			SetContentView (Resource.Layout.Main);
-		
+			protected override void OnCreate (Bundle bundle)
+			{
+				base.OnCreate (bundle);
+
+				// Set our view from the "main" layout resource
+				SetContentView (Resource.Layout.Main);
+			
+			}
 		}
 	}
-}
 
 <code>
 
@@ -90,29 +89,29 @@ Lets extend the View class and put the necessary minimum we need to get the view
 
 <code>
 
-using Android.Views;
-using Android.Content;
-using Android.Util;
+	using Android.Views;
+	using Android.Content;
+	using Android.Util;
 
-namespace XamarinDemo
-{
-	public class AwesomeView : View
+	namespace XamarinDemo
 	{
-		public AwesomeView(Context context) :
-		base(context)
+		public class AwesomeView : View
 		{
-		}
-		public AwesomeView(Context context, IAttributeSet attrs) :
-		base(context, attrs)
-		{
-		}
+			public AwesomeView(Context context) :
+			base(context)
+			{
+			}
+			public AwesomeView(Context context, IAttributeSet attrs) :
+			base(context, attrs)
+			{
+			}
 
-		public AwesomeView(Context context, IAttributeSet attrs, int defStyle) :
-		base(context, attrs, defStyle)
-		{
+			public AwesomeView(Context context, IAttributeSet attrs, int defStyle) :
+			base(context, attrs, defStyle)
+			{
+			}
 		}
 	}
-}
 
 
 
@@ -124,19 +123,19 @@ Lets include this view in our layout
 
 <code>
 
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+	<?xml version="1.0" encoding="utf-8"?>
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	    android:orientation="vertical"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent">
 
-    <xamarindemo.AwesomeView
-    	android:id="@+id/awesomeview_main"
-    	android:layout_height="wrap_content"
-    	android:layout_width="wrap_content"
-    />
- 
-</LinearLayout>
+	    <xamarindemo.AwesomeView
+	    	android:id="@+id/awesomeview_main"
+	    	android:layout_height="wrap_content"
+	    	android:layout_width="wrap_content"
+	    />
+	 
+	</LinearLayout>
 
 <code>
 
