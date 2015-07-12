@@ -271,7 +271,7 @@ Next we'll override the ontouchevent function and also check if the event is ins
 {% highlight java linenos %}	
 
 
-		override bool OnTouchEvent(MotionEvent e) {
+		public override bool OnTouchEvent(MotionEvent e) {
 
 			int indexHit = isInsideCircle (e.GetX (), e.GetY ());
 			if (indexHit > -1) {
@@ -366,7 +366,7 @@ Now lets add the start and end values for each animator and actually start the a
 
 {% highlight java linenos %}	
 
-		 override bool OnTouchEvent(MotionEvent e) {
+		 public override bool OnTouchEvent(MotionEvent e) {
 
 			float centerScreenX = Width / 2.0f;
 			float centerScreenY = Height / 2.0f;
