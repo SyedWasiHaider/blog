@@ -407,3 +407,34 @@ Now lets add the start and end values for each animator and actually start the a
 In the ontouchevent function, now set the activeindex and all the starting and end values for the interpolator. In the drawSmallCircles function, we skip the index if its the big circle and in the drawBigCircle function we only draw something has actually been tapped (i.e. the index is greated than -1)
 
 Hit play and should see the small circle move to the center and grow when tapped.
+
+
+### Step 5
+
+Lets finish this off by adding some colors and text to our circles. Add the following colors array (and again you can choose to do different colors).
+
+<code>
+
+	Color []colors = new []{Color.Red, Color.LightBlue, Color.Green, Color.Yellow, Color.Orange};
+
+<code>
+
+And as you might've guessed, we just replace the white color in paint with the colors[index]. Replace paintCircle with the following in the small circle function and move it inside the for loop
+
+
+<code>
+var paintCircle = new Paint (){ Color = colors[i]};
+<code>
+
+
+And with this in the big circle function:
+
+<code>
+var paintCircle = new Paint (){ Color = colors[activeIndex]};
+<code>
+
+Fire up the app and you should see something like this:
+
+![step5](public/step5.png "Step 5")
+
+
