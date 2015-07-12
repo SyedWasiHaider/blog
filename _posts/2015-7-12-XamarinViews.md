@@ -45,6 +45,9 @@ Lets get rid of the button since we won't be using it. From the panel on the lef
 
 	</LinearLayout>
 
+	var k = 11;
+	var test = test + 1;
+
 <code>
 
 
