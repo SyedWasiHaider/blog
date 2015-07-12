@@ -126,7 +126,7 @@ Lets extend the View class and put the necessary minimum we need to get the view
 Lets include this view in our layout
 
 
-{% highlight xml linenos %}	
+{% highlight html linenos %}	
 
 	<?xml version="1.0" encoding="utf-8"?>
 	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
