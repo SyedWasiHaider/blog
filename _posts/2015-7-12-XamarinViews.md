@@ -25,7 +25,7 @@ sometimes when you need to do a really complicated custom view, using forms alon
 * Some free time (should take roughly 45min-1hr depending on how fast you want to go through it)
 
 
-The view itself is a little contrived but the purpose here is to show how seamlessly the native Android code maps so to the Xamarin code. If you've ever done custom views in native Java, this will look extremely familiar.
+The view itself is a little contrived but the purpose here is to show how seamlessly the native Android code maps so to the Xamarin code. If you've ever done custom views in native Java, this will look extremely familiar. *If you want to skip everything and just get to the final code, just have a look at the bottom. Be sure to add the names array if you want it to work properly.*
 
 
 ### Setup
