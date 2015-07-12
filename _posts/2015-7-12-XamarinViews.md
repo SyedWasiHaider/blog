@@ -201,12 +201,22 @@ Note that the 0,0 starts at the top left corner (as with most drawing engines). 
 ![step2](public/step2.png "Step 2")
 
 
-If you understood that, then drawing the big circle should be even easier:
+If you understood that, then drawing the big circle should be even easier.
 
+
+<code>
+
+		int radius_big = 180;
+		private void drawBigCircle(Canvas canvas){
+			var paintCircle = new Paint (){ Color = Color.White};
+			canvas.DrawCircle (Width/2.0, Height/2.0, radius_big, paintCircle);
+		}
 
 <code>
 
 
 
-<code>
-	
+![step2.1](public/step2.1.png "Step 2.1")
+
+One thing you might note is that the size of circles looks different on your phone. That is because different phones have different resolutions so feel free to mess around with the values. However, a proper implementation would calculate the pixels using a conversion. We'll skip that for now.
+
