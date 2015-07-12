@@ -5,8 +5,8 @@ title: Creating an Android Custom View in Xamarin
 
 Hello!
 
-I've played with Xamarin on Android quite a bit recently. If you don't
-what Xamarin is and you're interested in cross-platform development, you should definitely check it out: [Xamarin](http://xamarin.com)
+I've been playing with Xamarin on Android quite a bit recently. If you don't
+know what Xamarin is and you're interested in cross-platform development, you should definitely check it out: [Xamarin](http://xamarin.com)
 
 ### Custom Views
 
@@ -47,7 +47,7 @@ Lets get rid of the button since we won't be using it. From the panel on the lef
 
 	</LinearLayout>
 
-</code>
+<code>
 
 Lets also get rid of the button related code in the MainActivity.cs (which can be found at root of the project). So you code should look something like this for now:
 
@@ -74,7 +74,7 @@ namespace XamarinDemo
 	}
 }
 
-</code>
+<code>
 
 
 ### Step 1
@@ -85,3 +85,60 @@ thoughout the rest of the tutorial:
 
 ![step1](public/step1.png "Step 1")
 
+
+Lets extend the View class and put the necessary minimum we need to get the view class working. Don't be too concerned with the attributeset and style constructor as that is somewhat outside the (time) scope of this tutorial.
+
+<code>
+
+using Android.Views;
+using Android.Content;
+using Android.Util;
+
+namespace XamarinDemo
+{
+	public class AwesomeView : View
+	{
+		public AwesomeView(Context context) :
+		base(context)
+		{
+		}
+		public AwesomeView(Context context, IAttributeSet attrs) :
+		base(context, attrs)
+		{
+		}
+
+		public AwesomeView(Context context, IAttributeSet attrs, int defStyle) :
+		base(context, attrs, defStyle)
+		{
+		}
+	}
+}
+
+
+
+<code>
+
+
+Lets include this view in our layout
+
+
+<code>
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <xamarindemo.AwesomeView
+    	android:id="@+id/awesomeview_main"
+    	android:layout_height="wrap_content"
+    	android:layout_width="wrap_content"
+    />
+ 
+</LinearLayout>
+
+<code>
+
+
+Hit the play button and you'll see...Nothing. Well that's because we aren't doing any drawing yet.
