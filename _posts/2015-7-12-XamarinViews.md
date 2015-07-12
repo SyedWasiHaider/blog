@@ -177,23 +177,23 @@ Lets start with drawing the little circles at the bottom. Add the following to d
 
 {% highlight yaml %}	
 
-		const int NUM_BUBBLES = 5;
-		int radius = 60;
-		private void drawSmallCircles(Canvas canvas){
+const int NUM_BUBBLES = 5;
+int radius = 60;
+private void drawSmallCircles(Canvas canvas){
 
-			int spacing = Width / NUM_BUBBLES;
-			int shift = spacing / 2;
-			int bottomMargin = 10;
+	int spacing = Width / NUM_BUBBLES;
+	int shift = spacing / 2;
+	int bottomMargin = 10;
 
-			var paintCircle = new Paint (){ Color = Color.White};
-			for (int i = 0; i < NUM_BUBBLES; i++) {
-				int x = i * spacing + shift;
-				int y = Height - radius * 2 - bottomMargin;
-				canvas.DrawCircle (x, y, radius, paintCircle);
-			}
-			
+	var paintCircle = new Paint (){ Color = Color.White};
+	for (int i = 0; i < NUM_BUBBLES; i++) {
+		int x = i * spacing + shift;
+		int y = Height - radius * 2 - bottomMargin;
+		canvas.DrawCircle (x, y, radius, paintCircle);
+	}
+	
 
-		}
+}
 
 {% endhighlight %}
 
