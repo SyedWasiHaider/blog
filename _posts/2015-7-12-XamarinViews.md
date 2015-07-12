@@ -36,7 +36,7 @@ Fire up Xamarin studio and create a new Android project.
 
 Lets get rid of the button since we won't be using it. From the panel on the left, go to Resources -> Layout -> Main.axml and get rid of the button element. So your main.axml should look like this:
 
-<code>
+{% endhighlight %}
 
 	<?xml version="1.0" encoding="utf-8"?>
 	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -46,11 +46,11 @@ Lets get rid of the button since we won't be using it. From the panel on the lef
 
 	</LinearLayout>
 
-<code>
+{% endhighlight %}
 
 Lets also get rid of the button related code in the MainActivity.cs (which can be found at root of the project). So you code should look something like this for now:
 
-<code>
+{% highlight java linenos %}	
 
 	using Android.App;
 	using Android.OS;
@@ -72,7 +72,7 @@ Lets also get rid of the button related code in the MainActivity.cs (which can b
 		}
 	}
 
-<code>
+{% endhighlight %}
 
 
 ### Step 1
@@ -86,7 +86,7 @@ thoughout the rest of the tutorial:
 
 Lets extend the View class and put the necessary minimum we need to get the view class working. Don't be too concerned with the attributeset and style constructor as that is somewhat outside the (time) scope of this tutorial.
 
-<code>
+{% highlight java linenos %}	
 
 	using Android.Views;
 	using Android.Content;
@@ -120,13 +120,13 @@ Lets extend the View class and put the necessary minimum we need to get the view
 		}
 	}
 
-<code>
+{% endhighlight %}
 
 
 Lets include this view in our layout
 
 
-<code>
+{% highlight java linenos %}	
 
 	<?xml version="1.0" encoding="utf-8"?>
 	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -142,7 +142,7 @@ Lets include this view in our layout
 	 
 	</LinearLayout>
 
-<code>
+{% endhighlight %}
 
 
 Hit the play button and you'll see...Nothing. Well that's because we aren't doing any drawing yet.
@@ -152,7 +152,7 @@ Hit the play button and you'll see...Nothing. Well that's because we aren't doin
 
 The first thing we need to do to start drawing is to override the onDraw method for the view. We'll also create two stub functions called drawBigCircle and drawSmallCircle to make our code a little easier to work with. So you should've added the following to your view:
 
-<code>
+{% highlight java linenos %}	
 
 
 		private void drawBigCircle(Canvas canvas){
@@ -167,7 +167,7 @@ The first thing we need to do to start drawing is to override the onDraw method 
 		}
 
 
-<code>
+{% endhighlight %}
 
 
 Lets start with drawing the little circles at the bottom. Add the following to drawSmallCircles:
@@ -208,7 +208,7 @@ Note that the 0,0 starts at the top left corner (as with most drawing engines). 
 If you understood that, then drawing the big circle should be even easier.
 
 
-<code>
+{% highlight java linenos %}	
 
 		int radius_big = 180;
 		private void drawBigCircle(Canvas canvas){
@@ -216,7 +216,7 @@ If you understood that, then drawing the big circle should be even easier.
 			canvas.DrawCircle (Width/2.0, Height/2.0, radius_big, paintCircle);
 		}
 
-<code>
+{% endhighlight %}
 
 
 
@@ -228,7 +228,7 @@ One thing you might note is that the size of circles looks different on your pho
 
 Now lets add some interactivity to our view. First, we need to keep track of the x,y coordinates of the small circles so we'll create a list of x,y pairs to hold that. We'll also optimize a little since right now we're calculating x and y on every draw. Nothing in terms of drawing should change.
 
-<code>
+{% highlight java linenos %}	
 
 		const int NUM_BUBBLES = 5;
 		int radius = 60;
@@ -261,13 +261,13 @@ Now lets add some interactivity to our view. First, we need to keep track of the
 		}
 	
 
-<code>
+{% endhighlight %}
 
 
 Next we'll override the ontouchevent function and also check if the event is inside any of the given circles. The is InsideCircle function will basically return the index of the circle that was tapped/touched.
 
 
-<code>
+{% highlight java linenos %}	
 
 		public override bool OnTouchEvent(MotionEvent e) {
 
@@ -294,7 +294,7 @@ Next we'll override the ontouchevent function and also check if the event is ins
 			return -1;
 		}
 
-<code>
+{% endhighlight %}
 
 
 Tap the small circles and you should see the toast show up with the correct index.
@@ -306,7 +306,7 @@ Now lets add some cool animations to this view. Remember we want the small circl
 
 
 
-<code>
+{% highlight java linenos %}	
 
 		//Important properties for the large bubble
 		int activeIndex = -1;
@@ -318,15 +318,14 @@ Now lets add some cool animations to this view. Remember we want the small circl
 		ValueAnimator animatorRadius;
 
 
-<code>
+{% endhighlight %}
 
 
 By active, I just mean the big circle. Now let's initialize them by putting the following in the init function:
 
 
 
-<code>
-
+{% highlight java linenos %}	
 
 		animatorX = new ValueAnimator ();
 		animatorY = new ValueAnimator ();
@@ -356,14 +355,14 @@ By active, I just mean the big circle. Now let's initialize them by putting the 
 
 
 
-<code>
+{% endhighlight %}
 
 This is just saying that each animation will last 1 second and we added a fancy interpolator to make the animation look cool (feel free to change it up). We also subscribe to the update event to get the latest value and then we call invalidate which basically clear the canvas and call the onDraw method again.
 
 
 Now lets add the start and end values for each animator and actually start the animations. Modify the onTouchEvent, drawBigCircle and drawLittleCircle function as follows:
 
-<code>
+{% highlight java linenos %}	
 
 	public override bool OnTouchEvent(MotionEvent e) {
 
@@ -405,7 +404,7 @@ Now lets add the start and end values for each animator and actually start the a
 			}
 		}
 
-<code>
+{% endhighlight %}
 
 
 In the ontouchevent function, now set the activeindex and all the starting and end values for the interpolator. In the drawSmallCircles function, we skip the index if its the big circle and in the drawBigCircle function we only draw something has actually been tapped (i.e. the index is greated than -1)
@@ -417,25 +416,26 @@ Hit play and should see the small circle move to the center and grow when tapped
 
 Lets finish this off by adding some colors and text to our circles. Add the following colors array (and again you can choose to do different colors).
 
-<code>
+{% highlight java linenos %}	
 
 	Color []colors = new []{Color.Red, Color.LightBlue, Color.Green, Color.Yellow, Color.Orange};
 
-<code>
+{% endhighlight %}
 
 And as you might've guessed, we just replace the white color in paint with the colors[index]. Replace paintCircle with the following in the small circle function and move it inside the for loop
 
 
-<code>
+{% highlight java linenos %}	
 var paintCircle = new Paint (){ Color = colors[i]};
-<code>
+{% endhighlight %}
 
 
 And with this in the big circle function:
 
-<code>
+{% highlight java linenos %}	
+
 var paintCircle = new Paint (){ Color = colors[activeIndex]};
-<code>
+{% endhighlight %}
 
 Fire up the app and you should see something like this:
 
@@ -444,26 +444,26 @@ Fire up the app and you should see something like this:
 
 Lets add an array to hold some names to display in the circles.
 
-<code>
+{% highlight java linenos %}	
 		public string [] names {get;set;}
-<code>
+{% endhighlight %}
 
 
 And then in your MainActivity.cs add the following names (or anything names you want) but make sure you have at least 5.
 
 
-<code>
+{% highlight java linenos %}	
 
 	var awesomeview = FindViewById<AwesomeView> (Resource.Id.awesomeview_main);
 	awesomeview.names = new []{"Bob", "John", "Paul", "Wasi", "Mark"};
 
-<code>
+{% endhighlight %}
 
 
 Finally lets show the names on the big circle. Modify the big circle function as follows:
 
 
-<code>
+{% highlight java linenos %}	
 
 	private void drawBigCircle(Canvas canvas){
 			if (activeIndex > -1) {
@@ -483,14 +483,13 @@ Finally lets show the names on the big circle. Modify the big circle function as
 			}
 	}
 
-<code>
+{% endhighlight %}
 
 
 Lets also show the first letter of each name on the little circle.
 
 
-<code>
-
+{% highlight java linenos %}	
 
 		 void drawSmallCircles(Canvas canvas){
 
@@ -518,7 +517,7 @@ Lets also show the first letter of each name on the little circle.
 		}
 
 
-<code>
+{% endhighlight %}
 
 
 ### Done
