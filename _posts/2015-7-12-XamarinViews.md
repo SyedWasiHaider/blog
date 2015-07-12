@@ -175,7 +175,9 @@ Lets start with drawing the little circles at the bottom. Add the following to d
 
 
 
-<code>	const int NUM_BUBBLES = 5;
+{% highlight %}	
+
+		const int NUM_BUBBLES = 5;
 		int radius = 60;
 		private void drawSmallCircles(Canvas canvas){
 
@@ -193,7 +195,8 @@ Lets start with drawing the little circles at the bottom. Add the following to d
 
 		}
 
-<code>
+{% endhighlight %}
+
 
 Note that the 0,0 starts at the top left corner (as with most drawing engines). We equally space the 5 circles and show them just above the bottom of the screen. You should see something like this when you hit play:
 
