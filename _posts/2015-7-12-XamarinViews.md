@@ -175,7 +175,7 @@ Lets start with drawing the little circles at the bottom. Add the following to d
 
 
 
-{% highlight %}	
+{% highlight yaml %}	
 
 		const int NUM_BUBBLES = 5;
 		int radius = 60;
