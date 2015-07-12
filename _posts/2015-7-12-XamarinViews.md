@@ -126,7 +126,7 @@ Lets extend the View class and put the necessary minimum we need to get the view
 Lets include this view in our layout
 
 
-<code>
+{% highlight xml linenos %}	
 
 	<?xml version="1.0" encoding="utf-8"?>
 	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -142,7 +142,7 @@ Lets include this view in our layout
 	 
 	</LinearLayout>
 
-<code>
+{% endhighlight %}
 
 
 Hit the play button and you'll see...Nothing. Well that's because we aren't doing any drawing yet.
@@ -190,8 +190,7 @@ private void drawSmallCircles(Canvas canvas){
 		int x = i * spacing + shift;
 		int y = Height - radius * 2 - bottomMargin;
 		canvas.DrawCircle (x, y, radius, paintCircle);
-	}
-	
+	}	
 
 }
 
@@ -384,26 +383,26 @@ Now lets add the start and end values for each animator and actually start the a
 
 
 	int radius_big = 180;
-	private void drawBigCircle(Canvas canvas){
+	void drawBigCircle(Canvas canvas){
 			if (activeIndex > -1) {
 				var paintCircle = new Paint (){ Color = Color.White };
 				canvas.DrawCircle (activeX, activeY, activeRadius, paintCircle);
 			}
 	}
 
-	 void drawSmallCircles(Canvas canvas){
+	void drawSmallCircles(Canvas canvas){
 
-			initPositions ();
-			var paintCircle = new Paint (){ Color = Color.White};
-			for (int i = 0; i < NUM_BUBBLES; i++) {
-				if (i == activeIndex) {
-					continue;
-				}
-				int x = (int)positions [i].First;
-				int y = (int)positions [i].Second;
-				canvas.DrawCircle (x, y, radius, paintCircle);
+		initPositions ();
+		var paintCircle = new Paint (){ Color = Color.White};
+		for (int i = 0; i < NUM_BUBBLES; i++) {
+			if (i == activeIndex) {
+				continue;
 			}
+			int x = (int)positions [i].First;
+			int y = (int)positions [i].Second;
+			canvas.DrawCircle (x, y, radius, paintCircle);
 		}
+	}
 
 {% endhighlight %}
 
@@ -418,9 +417,7 @@ Hit play and should see the small circle move to the center and grow when tapped
 Lets finish this off by adding some colors and text to our circles. Add the following colors array (and again you can choose to do different colors).
 
 {% highlight java linenos %}	
-
 	Color []colors = new []{Color.Red, Color.LightBlue, Color.Green, Color.Yellow, Color.Orange};
-
 {% endhighlight %}
 
 
@@ -428,7 +425,7 @@ And as you might've guessed, we just replace the white color in paint with the c
 
 
 {% highlight java linenos %}	
-var paintCircle = new Paint (){ Color = colors[i]};
+	var paintCircle = new Paint (){ Color = colors[i]};
 {% endhighlight %}
 
 
@@ -436,7 +433,7 @@ var paintCircle = new Paint (){ Color = colors[i]};
 And with this in the big circle function:
 
 {% highlight java linenos %}	
-var paintCircle = new Paint (){ Color = colors[activeIndex]};
+	var paintCircle = new Paint (){ Color = colors[activeIndex]};
 {% endhighlight %}
 
 
@@ -467,22 +464,22 @@ Finally lets show the names on the big circle. Modify the big circle function as
 
 {% highlight java linenos %}	
 
-	private void drawBigCircle(Canvas canvas){
-			if (activeIndex > -1) {
-				var paintCircle = new Paint (){ Color = colors[activeIndex]};
-				canvas.DrawCircle (activeX, activeY, activeRadius, paintCircle);
+	void drawBigCircle(Canvas canvas){
+		if (activeIndex > -1) {
+			var paintCircle = new Paint (){ Color = colors[activeIndex]};
+			canvas.DrawCircle (activeX, activeY, activeRadius, paintCircle);
 
-				var paintText = new Paint(){Color = Color.Black};
-				//  the screen's density scale
-				var scale = mContext.Resources.DisplayMetrics.Density;
-				// Convert the dps to pixels, based on density scale
-				var textSizePx = (int) (20f * scale);
-				var name = names [activeIndex];
-				paintText.TextSize = textSizePx;
-				paintText.TextAlign = Paint.Align.Center;
-				canvas.DrawText (name, activeX, activeY + radius/2, paintText);
+			var paintText = new Paint(){Color = Color.Black};
+			//  the screen's density scale
+			var scale = mContext.Resources.DisplayMetrics.Density;
+			// Convert the dps to pixels, based on density scale
+			var textSizePx = (int) (20f * scale);
+			var name = names [activeIndex];
+			paintText.TextSize = textSizePx;
+			paintText.TextAlign = Paint.Align.Center;
+			canvas.DrawText (name, activeX, activeY + radius/2, paintText);
 
-			}
+		}
 	}
 
 {% endhighlight %}
@@ -493,30 +490,30 @@ Lets also show the first letter of each name on the little circle.
 
 {% highlight java linenos %}	
 
-		 void drawSmallCircles(Canvas canvas){
+	void drawSmallCircles(Canvas canvas){
 
-			initPositions ();
+		initPositions ();
 
-			var paintText = new Paint (){ Color = Color.Black };
-			// Get the screen's density scale
-			var scale = mContext.Resources.DisplayMetrics.Density;
-			// Convert the dps to pixels, based on density scale
-			var textSizePx = (int) (30f * scale);
-			paintText.TextSize = textSizePx;
-			paintText.TextAlign = Paint.Align.Center;
+		var paintText = new Paint (){ Color = Color.Black };
+		// Get the screen's density scale
+		var scale = mContext.Resources.DisplayMetrics.Density;
+		// Convert the dps to pixels, based on density scale
+		var textSizePx = (int) (30f * scale);
+		paintText.TextSize = textSizePx;
+		paintText.TextAlign = Paint.Align.Center;
 
-			for (int i = 0; i < NUM_BUBBLES; i++) {
-				if (i == activeIndex) {
-					continue;
-				}
-
-				var paintCircle = new Paint (){ Color = colors[i]};
-				int x = (int)positions [i].First;
-				int y = (int)positions [i].Second;
-				canvas.DrawCircle (x, y, radius, paintCircle);
-				canvas.DrawText (""+names [i][0], x, y + radius/2, paintText);
+		for (int i = 0; i < NUM_BUBBLES; i++) {
+			if (i == activeIndex) {
+				continue;
 			}
+
+			var paintCircle = new Paint (){ Color = colors[i]};
+			int x = (int)positions [i].First;
+			int y = (int)positions [i].Second;
+			canvas.DrawCircle (x, y, radius, paintCircle);
+			canvas.DrawText (""+names [i][0], x, y + radius/2, paintText);
 		}
+	}
 
 
 {% endhighlight %}
