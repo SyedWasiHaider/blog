@@ -9,7 +9,9 @@ I've been playing with Xamarin on Android quite a bit recently. If you don't kno
 
 ### Custom Views
 
-In this session, I am going to create a simple custom Android view with Xamarin.
+In this session, I am going to create a simple custom Android view with Xamarin. The final product will look something like below:
+
+![final](public/final.gif "Final")
 
 ### Why?
 
