@@ -35,7 +35,7 @@ Fire up Xamarin studio and create a new Android project.
 
 Lets get rid of the button since we won't be using it. From the panel on the left, go to Resources -> Layout -> Main.axml and get rid of the button element. So your main.axml should look like this:
 
-<code
+<code>
 
 	<?xml version="1.0" encoding="utf-8"?>
 	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -45,7 +45,6 @@ Lets get rid of the button since we won't be using it. From the panel on the lef
 
 	</LinearLayout>
 
-/>
-
+<code>
 
 
