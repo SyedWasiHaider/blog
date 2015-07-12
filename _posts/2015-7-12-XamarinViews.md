@@ -11,7 +11,7 @@ I've been playing with Xamarin on Android quite a bit recently. If you don't kno
 
 In this session, I am going to create a simple custom Android view with Xamarin. The final product will look something like below:
 
-![final](public/final.gif "Final")
+![final](http://syedwasihaider.github.io/blog/public/final.gif "Final")
 
 ### Why?
 
@@ -32,7 +32,7 @@ The view itself is a little contrived but the purpose here is to show how seamle
 
 Fire up Xamarin studio and create a new Android project. 
 
-![step0](public/step0.png "Step 0")
+![step0](http://syedwasihaider.github.io/blog/public/step0.png "Step 0")
 
 ### Clean up
 
@@ -60,7 +60,7 @@ Lets also get rid of the button related code in the MainActivity.cs (which can b
 	namespace XamarinDemo
 	{
 		[Activity (Label = "XamarinDemo", MainLauncher = true, Icon = "@drawable/icon")]
-		public class MainActivity : Activity
+		http://syedwasihaider.github.io/blog/public class MainActivity : Activity
 		{
 
 			protected override void OnCreate (Bundle bundle)
@@ -83,7 +83,7 @@ Now, let's create a class that will implement our custom view. Right click on yo
 thoughout the rest of the tutorial:
 
 
-![step1](public/step1.png "Step 1")
+![step1](http://syedwasihaider.github.io/blog/public/step1.png "Step 1")
 
 
 Lets extend the View class and put the necessary minimum we need to get the view class working. Don't be too concerned with the attributeset and style constructor as that is somewhat outside the (time) scope of this tutorial.
@@ -96,21 +96,21 @@ Lets extend the View class and put the necessary minimum we need to get the view
 
 	namespace XamarinDemo
 	{
-		public class AwesomeView : View
+		http://syedwasihaider.github.io/blog/public class AwesomeView : View
 		{
 			Context mContext;
-			public AwesomeView(Context context) :
+			http://syedwasihaider.github.io/blog/public AwesomeView(Context context) :
 			base(context)
 			{
 				init (context);
 			}
-			public AwesomeView(Context context, IAttributeSet attrs) :
+			http://syedwasihaider.github.io/blog/public AwesomeView(Context context, IAttributeSet attrs) :
 			base(context, attrs)
 			{
 				init (context);
 			}
 
-			public AwesomeView(Context context, IAttributeSet attrs, int defStyle) :
+			http://syedwasihaider.github.io/blog/public AwesomeView(Context context, IAttributeSet attrs, int defStyle) :
 			base(context, attrs, defStyle)
 			{
 				init (context);
@@ -203,7 +203,7 @@ Note that the 0,0 starts at the top left corner (as with most drawing engines). 
 
 
 
-![step2](public/step2.png "Step 2")
+![step2](http://syedwasihaider.github.io/blog/public/step2.png "Step 2")
 
 
 If you understood that, then drawing the big circle should be even easier.
@@ -221,7 +221,7 @@ If you understood that, then drawing the big circle should be even easier.
 
 
 
-![step2.1](public/step2.1.png "Step 2.1")
+![step2.1](http://syedwasihaider.github.io/blog/public/step2.1.png "Step 2.1")
 
 One thing you might note is that the size of circles looks different on your phone. That is because different phones have different resolutions so feel free to mess around with the values. However, a proper implementation would calculate the pixels using a dpi to pixel conversion. We'll skip that for now.
 
@@ -271,7 +271,7 @@ Next we'll override the ontouchevent function and also check if the event is ins
 
 {% highlight java linenos %}	
 
-		public override bool OnTouchEvent(MotionEvent e) {
+		http://syedwasihaider.github.io/blog/public override bool OnTouchEvent(MotionEvent e) {
 
 			int indexHit = isInsideCircle (e.GetX (), e.GetY ());
 			if (indexHit > -1) {
@@ -366,7 +366,7 @@ Now lets add the start and end values for each animator and actually start the a
 
 {% highlight java linenos %}	
 
-	public override bool OnTouchEvent(MotionEvent e) {
+	http://syedwasihaider.github.io/blog/public override bool OnTouchEvent(MotionEvent e) {
 
 			float centerScreenX = Width / 2.0f;
 			float centerScreenY = Height / 2.0f;
@@ -441,13 +441,13 @@ And with this in the big circle function:
 
 Fire up the app and you should see something like this:
 
-![step5](public/step5.png "Step 5")
+![step5](http://syedwasihaider.github.io/blog/public/step5.png "Step 5")
 
 
 Lets add an array to hold some names to display in the circles.
 
 {% highlight java linenos %}	
-		public string [] names {get;set;}
+		http://syedwasihaider.github.io/blog/public string [] names {get;set;}
 {% endhighlight %}
 
 
@@ -536,7 +536,7 @@ using Android.Views.Animations;
 
 namespace XamarinDemo
 {
-	public class AwesomeView : View
+	http://syedwasihaider.github.io/blog/public class AwesomeView : View
 	{
 		
 		Context mContext;
@@ -552,20 +552,20 @@ namespace XamarinDemo
 
 		Color []colors = new []{Color.Red, Color.LightBlue, Color.Green, Color.Yellow, Color.Orange};
 
-		public string [] names {get;set;}
+		http://syedwasihaider.github.io/blog/public string [] names {get;set;}
 
-		public AwesomeView(Context context) :
+		http://syedwasihaider.github.io/blog/public AwesomeView(Context context) :
 		base(context)
 		{
 			init (context);
 		}
-		public AwesomeView(Context context, IAttributeSet attrs) :
+		http://syedwasihaider.github.io/blog/public AwesomeView(Context context, IAttributeSet attrs) :
 		base(context, attrs)
 		{
 			init (context);
 		}
 
-		public AwesomeView(Context context, IAttributeSet attrs, int defStyle) :
+		http://syedwasihaider.github.io/blog/public AwesomeView(Context context, IAttributeSet attrs, int defStyle) :
 		base(context, attrs, defStyle)
 		{
 			init (context);
@@ -599,7 +599,7 @@ namespace XamarinDemo
 
 		}
 
-		public override bool OnTouchEvent(MotionEvent e) {
+		http://syedwasihaider.github.io/blog/public override bool OnTouchEvent(MotionEvent e) {
 
 			float centerScreenX = Width / 2.0f;
 			float centerScreenY = Height / 2.0f;
