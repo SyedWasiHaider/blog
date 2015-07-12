@@ -172,15 +172,15 @@ The first thing we need to do to start drawing is to override the onDraw method 
 
 Lets start with drawing the little circles at the bottom. Add the following to drawSmallCircles:
 
-<code>
 
-		<strong> 
+
+<strong> 
+<code>
 		const int NUM_BUBBLES = 5;
 		int radius = 60;
-		</strong>
 		private void drawSmallCircles(Canvas canvas){
 
-			<strong> int spacing = Width / NUM_BUBBLES;
+			int spacing = Width / NUM_BUBBLES;
 			int shift = spacing / 2;
 			int bottomMargin = 10;
 
@@ -190,11 +190,12 @@ Lets start with drawing the little circles at the bottom. Add the following to d
 				int y = Height - radius * 2 - bottomMargin;
 				canvas.DrawCircle (x, y, radius, paintCircle);
 			}
-			</strong>
+			
 
 		}
 
 <code>
+</strong>
 
 Note that the 0,0 starts at the top left corner (as with most drawing engines). We equally space the 5 circles and show them just above the bottom of the screen. You should see something like this when you hit play:
 
