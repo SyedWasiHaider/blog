@@ -174,11 +174,13 @@ Lets start with drawing the little circles at the bottom. Add the following to d
 
 <code>
 
+		<strong> 
 		const int NUM_BUBBLES = 5;
 		int radius = 60;
+		</strong>
 		private void drawSmallCircles(Canvas canvas){
 
-			int spacing = Width / NUM_BUBBLES;
+			<strong> int spacing = Width / NUM_BUBBLES;
 			int shift = spacing / 2;
 			int bottomMargin = 10;
 
@@ -188,6 +190,7 @@ Lets start with drawing the little circles at the bottom. Add the following to d
 				int y = Height - radius * 2 - bottomMargin;
 				canvas.DrawCircle (x, y, radius, paintCircle);
 			}
+			</strong>
 
 		}
 
