@@ -20,7 +20,7 @@ sometimes when you need to do a really complicated custom view, using forms alon
 
 * Xamarin Studio (or Visual studio with the Xamarin SDK)
 * An Android Phone (ideally with 4.0+ but 3.0+ should work too)
-* About 30-45min of time to spare (I'll keep it short as possible!)
+* Some free time (should take roughly 45min-1hr depending on how fast you want to go through it)
 
 
 The view itself is a little contrived but the purpose here is to show how seamlessly the native Android code maps so to the Xamarin code. If you've ever done custom views in native Java, this will look extremely familiar.
@@ -435,5 +435,89 @@ var paintCircle = new Paint (){ Color = colors[activeIndex]};
 Fire up the app and you should see something like this:
 
 ![step5](public/step5.png "Step 5")
+
+
+Lets add an array to hold some names to display in the circles.
+
+<code>
+		public string [] names {get;set;}
+<code>
+
+
+And then in your MainActivity.cs add the following names (or anything names you want) but make sure you have at least 5.
+
+
+<code>
+
+	var awesomeview = FindViewById<AwesomeView> (Resource.Id.awesomeview_main);
+	awesomeview.names = new []{"Bob", "John", "Paul", "Wasi", "Mark"};
+
+<code>
+
+
+Finally lets show the names on the big circle. Modify the big circle function as follows:
+
+
+<code>
+
+	private void drawBigCircle(Canvas canvas){
+			if (activeIndex > -1) {
+				var paintCircle = new Paint (){ Color = colors[activeIndex]};
+				canvas.DrawCircle (activeX, activeY, activeRadius, paintCircle);
+
+				var paintText = new Paint(){Color = Color.Black};
+				//  the screen's density scale
+				var scale = mContext.Resources.DisplayMetrics.Density;
+				// Convert the dps to pixels, based on density scale
+				var textSizePx = (int) (20f * scale);
+				var name = names [activeIndex];
+				paintText.TextSize = textSizePx;
+				paintText.TextAlign = Paint.Align.Center;
+				canvas.DrawText (name, activeX, activeY + radius/2, paintText);
+
+			}
+	}
+
+<code>
+
+
+Lets also show the first letter of each name on the little circle.
+
+
+<code>
+
+
+		 void drawSmallCircles(Canvas canvas){
+
+			initPositions ();
+
+			var paintText = new Paint (){ Color = Color.Black };
+			// Get the screen's density scale
+			var scale = mContext.Resources.DisplayMetrics.Density;
+			// Convert the dps to pixels, based on density scale
+			var textSizePx = (int) (30f * scale);
+			paintText.TextSize = textSizePx;
+			paintText.TextAlign = Paint.Align.Center;
+
+			for (int i = 0; i < NUM_BUBBLES; i++) {
+				if (i == activeIndex) {
+					continue;
+				}
+
+				var paintCircle = new Paint (){ Color = colors[i]};
+				int x = (int)positions [i].First;
+				int y = (int)positions [i].Second;
+				canvas.DrawCircle (x, y, radius, paintCircle);
+				canvas.DrawText (""+names [i][0], x, y + radius/2, paintText);
+			}
+		}
+
+
+<code>
+
+
+### Done
+
+And we're done! This just shows you a taste of what you can accomplish with custom views.
 
 
