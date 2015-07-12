@@ -31,6 +31,8 @@ The view itself is a little contrived but the purpose here is to show how seamle
 
 Fire up Xamarin studio and create a new Android project. 
 
+![step0](public/step0.png "Step 0")
+
 ### Clean up
 
 Lets get rid of the button since we won't be using it. From the panel on the left, go to Resources -> Layout -> Main.axml and get rid of the button element. So your main.axml should look like this:
@@ -44,9 +46,6 @@ Lets get rid of the button since we won't be using it. From the panel on the lef
     	android:layout_height="fill_parent">
 
 	</LinearLayout>
-
-	var k = 11;
-	var test = test + 1;
 
 <code>
 
