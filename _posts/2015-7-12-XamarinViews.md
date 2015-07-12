@@ -218,5 +218,192 @@ If you understood that, then drawing the big circle should be even easier.
 
 ![step2.1](public/step2.1.png "Step 2.1")
 
-One thing you might note is that the size of circles looks different on your phone. That is because different phones have different resolutions so feel free to mess around with the values. However, a proper implementation would calculate the pixels using a conversion. We'll skip that for now.
+One thing you might note is that the size of circles looks different on your phone. That is because different phones have different resolutions so feel free to mess around with the values. However, a proper implementation would calculate the pixels using a dpi to pixel conversion. We'll skip that for now.
 
+### Step 3
+
+Now lets add some interactivity to our view. First, we need to keep track of the x,y coordinates of the small circles so we'll create a list of x,y pairs to hold that. We'll also optimize a little since right now we're calculating x and y on every draw. Nothing in terms of drawing should change.
+
+<code>
+
+		const int NUM_BUBBLES = 5;
+		int radius = 60;
+		List <Pair> positions = new List <Pair> ();
+		 void initPositions(){
+
+			if (positions.Count == 0) {
+
+				int spacing = Width / NUM_BUBBLES;
+				int shift = spacing / 2;
+				int bottomMargin = 10;
+
+				for (int i = 0; i < NUM_BUBBLES; i++) {
+					int x = i * spacing + shift;
+					int y = Height - radius * 2 - bottomMargin;
+					positions.Add (new Pair (x, y));
+				}
+			}
+		}
+
+		 void drawSmallCircles(Canvas canvas){
+
+			initPositions ();
+			var paintCircle = new Paint (){ Color = Color.White};
+			for (int i = 0; i < NUM_BUBBLES; i++) {
+				int x = (int)positions [i].First;
+				int y = (int)positions [i].Second;
+				canvas.DrawCircle (x, y, radius, paintCircle);
+			}
+		}
+	
+
+<code>
+
+
+Next we'll override the ontouchevent function and also check if the event is inside any of the given circles. The is InsideCircle function will basically return the index of the circle that was tapped/touched.
+
+
+<code>
+
+		public override bool OnTouchEvent(MotionEvent e) {
+
+			int indexHit = isInsideCircle (e.GetX (), e.GetY ());
+			if (indexHit > -1) {
+				Toast.MakeText (mContext, "Got index" + indexHit, ToastLength.Long).Show ();
+			}
+
+			return false;
+		}
+
+		int isInsideCircle(float x, float y){
+
+			for (int i = 0; i < positions.Count; i++) {
+
+				int centerX = (int)positions [i].First;
+				int centerY = (int)positions [i].Second;
+
+				if (System.Math.Pow (x - centerX, 2) + System.Math.Pow (y - centerY, 2) < System.Math.Pow (radius, 2)) {
+					return i;	
+				}
+			}
+
+			return -1;
+		}
+
+<code>
+
+
+Tap the small circles and you should see the toast show up with the correct index.
+
+
+### Step 4
+
+Now lets add some cool animations to this view. Remember we want the small circle to move to the center and we also want it to scale up. We'll start by adding some ValueAnimators and also the values that they will animate.
+
+
+
+<code>
+
+		//Important properties for the large bubble
+		int activeIndex = -1;
+		float activeX = 0;
+		float activeY = 0;
+		float activeRadius = 60;
+		ValueAnimator animatorX;
+		ValueAnimator animatorY;
+		ValueAnimator animatorRadius;
+
+
+<code>
+
+
+By active, I just mean the big circle. Now let's initialize them by putting the following in the init function:
+
+
+
+<code>
+
+
+		animatorX = new ValueAnimator ();
+		animatorY = new ValueAnimator ();
+		animatorRadius = new ValueAnimator ();
+		animatorX.SetDuration(1000);
+		animatorY.SetDuration (1000);
+		animatorRadius.SetDuration (1000);
+		animatorX.SetInterpolator (new DecelerateInterpolator());
+		animatorY.SetInterpolator (new BounceInterpolator());
+
+
+		//These are called everytime an update happens in the animator.
+		animatorRadius.SetIntValues (new [] { radius, radius_big });
+		animatorRadius.Update += (sender, e) => {
+			activeRadius = (float) e.Animation.AnimatedValue;
+			Invalidate();
+		};
+
+		animatorX.Update += (sender, e) => {
+			activeX = (float) e.Animation.AnimatedValue;
+			Invalidate();
+		};
+		animatorY.Update += (sender, e) => {
+			activeY = (float) e.Animation.AnimatedValue;
+			Invalidate();
+		};
+
+
+
+<code>
+
+This is just saying that each animation will last 1 second and we added a fancy interpolator to make the animation look cool (feel free to change it up). We also subscribe to the update event to get the latest value and then we call invalidate which basically clear the canvas and call the onDraw method again.
+
+
+Now lets add the start and end values for each animator and actually start the animations. Modify the onTouchEvent, drawBigCircle and drawLittleCircle function as follows:
+
+<code>
+
+	public override bool OnTouchEvent(MotionEvent e) {
+
+			float centerScreenX = Width / 2.0f;
+			float centerScreenY = Height / 2.0f;
+			activeIndex = isInsideCircle (e.GetX (), e.GetY ());
+			if (activeIndex > -1) {
+				Toast.MakeText (mContext, "Got index" + activeIndex, ToastLength.Long).Show ();
+				animatorX.SetFloatValues (new [] {(float)positions[activeIndex].First, centerScreenX});
+				animatorY.SetFloatValues (new [] {(float)positions[activeIndex].Second, centerScreenY});
+				animatorX.Start ();
+				animatorY.Start ();
+				animatorRadius.Start ();
+			}
+
+			return false;
+		}
+
+
+	int radius_big = 180;
+	private void drawBigCircle(Canvas canvas){
+			if (activeIndex > -1) {
+				var paintCircle = new Paint (){ Color = Color.White };
+				canvas.DrawCircle (activeX, activeY, activeRadius, paintCircle);
+			}
+	}
+
+	 void drawSmallCircles(Canvas canvas){
+
+			initPositions ();
+			var paintCircle = new Paint (){ Color = Color.White};
+			for (int i = 0; i < NUM_BUBBLES; i++) {
+				if (i == activeIndex) {
+					continue;
+				}
+				int x = (int)positions [i].First;
+				int y = (int)positions [i].Second;
+				canvas.DrawCircle (x, y, radius, paintCircle);
+			}
+		}
+
+<code>
+
+
+In the ontouchevent function, now set the activeindex and all the starting and end values for the interpolator. In the drawSmallCircles function, we skip the index if its the big circle and in the drawBigCircle function we only draw something has actually been tapped (i.e. the index is greated than -1)
+
+Hit play and should see the small circle move to the center and grow when tapped.
