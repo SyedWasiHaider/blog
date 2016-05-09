@@ -3,7 +3,7 @@ layout: post
 title: Creating an Android Custom View in Xamarin
 ---
 
-Hello!
+Hello there!
 
 I've been playing with Xamarin on Android quite a bit recently. If you don't know what Xamarin is and you're interested in cross-platform development, you should definitely check it out: [Xamarin](http://xamarin.com). *Even if you don't want to use Xamarin, you can directly apply this knowledge to native Android Java.*
 
